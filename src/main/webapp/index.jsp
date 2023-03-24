@@ -63,7 +63,7 @@
 	height: auto;
 	min-height: 100%;
 	width: 1200px;
-	margin-top: 100px;
+	margin-left: 35px;
 }
 	
 #wrapper{
