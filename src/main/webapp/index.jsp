@@ -51,11 +51,20 @@
 	width: 1200px;
 }
 
+#menu{
+	width: 1200px;
+	position: fixed;
+	background-color: #f6f9f7;
+	z-index: 1;
+	top: 0px;
+	margin-bottom: 100px;
+}
 
 .main {
 	height: auto;
 	min-height: 100%;
 	width: 1200px;
+	margin-top: 100px;
 }
 	
 #wrapper{

@@ -88,11 +88,11 @@
 			 <%
 			 // 로그인이 되어있고, 관리자면 글쓰기 버튼 보이게.
 			 if(loginok != null && isAdmin.equals("1")) {%>
-			 	<span> | 공지사항 | </span>
 				<button type="button" class="btn btn-default border border-secondary writeBtn" onclick="location.href='index.jsp?main=notification/notificationform.jsp'">글쓰기</button>
 			<%}%>
 			</div>
 	      	<div class="tableWrapper">
+	      		<span> | 공지사항 | </span>
 				<table class="table">
 					<%
 					SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
