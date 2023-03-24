@@ -54,7 +54,6 @@
 #menu{
 	width: 1200px;
 	position: fixed;
-	background-color: #f6f9f7;
 	z-index: 1;
 	top: 0px;
 	margin-bottom: 100px;
