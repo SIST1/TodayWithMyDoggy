@@ -279,7 +279,7 @@ td:not(.table-title), tr{
      if(loginok!=null && isAdmin.equals("1")){%>
 	 <tr>
 		<td colspan="6">
- 		<input type="checkbox" class="alldelcheck">전체선택
+ 		<div style="float:left"><input type="checkbox" class="alldelcheck">전체선택</div>
 			<button type="button" class="btn btn-default btn-sm" style="float:right"
 			id="btndel"><span class="glyphicon glyphicon-trash"></span>삭제</button>
 		<button type="button" class="btn btn-default btn-sm" style="float:right"
@@ -309,7 +309,8 @@ td:not(.table-title), tr{
    </table>
    </div>
    <div>
-   <a id="MOVE_TOP_BTN"  href="#">TOP</a>
+   <a id="MOVE_TOP_BTN"  href="#" style="border: 0px solid gray; width:50px; height:50px;
+   line-height: 50px; text-align: center; border-radius: 20px 30px 20px 30px; background-color: #d9e4f4">TOP</a>
    </div>
 </body>
 </html>

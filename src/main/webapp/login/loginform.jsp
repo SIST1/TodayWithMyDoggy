@@ -78,8 +78,6 @@ if (saveok != null) {
 					placeholder="비밀번호를 입력해주세요" required><i class="validation"><span></span><span></span></i>
 			</p>
 			</div>
-			<br>
-			<br>
 
 			<div class="form-inline form-group">
 				<div>
@@ -123,7 +121,6 @@ Kakao.init('c3daec463cc1c038e93542b4609bf488');
         url: '/v2/user/me',
         success: function(result) {
           id = result.id
-          connected_at = result.connected_at
           kakao_account = result.kakao_account
           nickname= kakao_account.profile.nickname
           email = kakao_account.email;
