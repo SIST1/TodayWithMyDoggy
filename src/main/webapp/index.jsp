@@ -51,12 +51,20 @@
 	width: 1200px;
 }
 
+#menu{
+	width: 1200px;
+	position: fixed;
+	z-index: 1;
+	top: 0px;
+	margin-bottom: 100px;
+}
 
 .main {
 	height: auto;
 	min-height: 100%;
 	width: 1200px;
 	margin-left: 35px;
+	margin-top:100px;
 }
 	
 #wrapper{
@@ -73,7 +81,7 @@
 #footer {
 	clear: both;
 	height: 200px;
-	width: 1200px;
+	width: 1280px;
 }
 
 	/* css */

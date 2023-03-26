@@ -50,48 +50,7 @@ public class QnaBoardDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		
-		String sql="";
-		
-		if(word!=null) {
-			
-			sql="select * from qna_board where title like ? or content like ? order by num desc limit ?,?";
-			
-			try {
-				pstmt=conn.prepareStatement(sql);
-
-				pstmt.setString(1, "%"+word+"%");
-				pstmt.setString(2, "%"+word+"%");
-				pstmt.setInt(3, start);
-				pstmt.setInt(4, perpage);
-				
-				rs=pstmt.executeQuery();
-				
-				while(rs.next()) {
-					
-					QnaBoardDto dto=new QnaBoardDto();
-					dto.setNum(rs.getString("num"));
-					dto.setId(rs.getString("id"));
-					dto.setTitle(rs.getString("title"));
-					dto.setContent(rs.getString("content"));
-					dto.setWriteday(rs.getTimestamp("writeday"));
-					dto.setReadcount(rs.getInt("readcount"));
-					dto.setSecret(rs.getString("secret"));
-					
-					list.add(dto);
-					
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				db.dbClose(rs, pstmt, conn);
-			}
-			
-			return list;
-			
-		}else {
-			
-			sql="select * from qna_board order by num desc limit ?,?";
+		String sql="select * from qna_board order by num desc limit ?,?";
 			
 			try {
 				pstmt=conn.prepareStatement(sql);
@@ -125,7 +84,7 @@ public class QnaBoardDao {
 			return list;
 		}
 		
-	}
+	
 	
 	//전체 글 개수
 	public int getTotalCount() {
