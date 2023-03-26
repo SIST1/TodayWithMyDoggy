@@ -233,27 +233,27 @@ String myid=(String)session.getAttribute("myid");
 			//이전
 			if (startPage > 1) {
 			%>
-			<li><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=startPage - 1%>">이전</a>
+			<li><a href="index.jsp?main=qna/qnalist.jsp?currentPage=<%=startPage - 1%>">이전</a>
 			</li>
 			<%
 			}
 			for (int pp = startPage; pp <= endPage; pp++) {
 			if (pp == currentPage) {
 			%>
-			<li class="active"><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=pp%>"><%=pp%></a>
+			<li class="active"><a href="index.jsp?main=qna/qnalist.jsp?currentPage=<%=pp%>"><%=pp%></a>
 			</li>
 			<%
 			} else {
 			%>
 
-			<li><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+			<li><a href="index.jsp?main=qna/qnalist.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
 			<%
 			}
 			}
 			//다음
 			if (endPage < totalPage) {
 			%>
-			<li><a href="index.jsp?main=dog-talking/board.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
+			<li><a href="index.jsp?main=qna/qnalist.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
 			<%
 			}
 			%>

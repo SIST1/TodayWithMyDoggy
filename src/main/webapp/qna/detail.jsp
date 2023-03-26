@@ -33,6 +33,8 @@
 	//답변 불러오기
 	QnaAnswerDao adao=new QnaAnswerDao();
 	QnaAnswerDto adto=adao.getAnswer(num);
+	
+	String currentPage=request.getParameter("currentPage");
 
 %>
 
