@@ -27,7 +27,7 @@ color:black;
 color:black;
 text-decoration:none;
 }
-a#MOVE_TOP_BTN {
+i#MOVE_TOP_BTN {
     position: fixed;
     right: 10%;
     bottom: 50px;
@@ -309,8 +309,8 @@ td:not(.table-title), tr{
    </table>
    </div>
    <div>
-   <a id="MOVE_TOP_BTN"  href="#" style="border: 0px solid gray; width:50px; height:50px;
-   line-height: 50px; text-align: center; border-radius: 20px 30px 20px 30px; background-color: #d9e4f4">TOP</a>
+   <i class="fa-solid fa-paw" id="MOVE_TOP_BTN"  href="#" style="border: 0px solid gray; width:50px; height:50px;
+   line-height: 50px; text-align: center; cursor: pointer">TOP</i>
    </div>
 </body>
 </html>
