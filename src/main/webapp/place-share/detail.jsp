@@ -107,7 +107,7 @@ div {
 }
 
 #map-addr:hover {
-	color: #e3d82b
+	color: #cc2230;
 }
 </style>
 <script type="text/javascript">
@@ -115,27 +115,28 @@ div {
 		$(".contentMod").hide()
 		$(".btnanswer").hide();
 		var boardnum = $("#boardnum").val();
+		var answerBoardNum = $("#answerBoardNum").val();
+		var answerCurrentPage = $("#answerCurrentPage").val();
 		//모든 댓글 수정 입력폼 숨기기
 		$(".modContents").hide();
 		//댓글 수정 입력폼에 값 넣기
 		var content = $("#answerContent").val();
 		$("#modContent").val(content);
 		//댓글 입력
-		
 		$("#btnanswer").click(function() {
 			$.ajax({
-				type : "get",
+				type : "post",
 				url : "place-share/answerAddAction.jsp",
 				dataType : "html",
 				data : {
-					"boardnum" : boardnum,
+					"boardnum" : answerBoardNum,
+					"currentPage" : answerCurrentPage,
 					"myid" : $("#myid").val(),
-					"content" : $("#content").val(),
-					"currentPage" : $("#curr").val()
+					"content" : $("#content").val()
 				},
 				success : function(res) {
+					location.reload();
 					$("#content").val(" ");
-					location.href="index.jsp?main=place-share/detail.jsp?num="+boardnum+"&currentPage"+$("#curr").val();
 				}
 			});
 		});
@@ -176,6 +177,10 @@ DogProfileDao proDao = new DogProfileDao();
 DogProfileDto proDto = proDao.getMainDogInfo(memberNum);
 // 프로필 사진 가져오기
 String proPhoto = proDto.getPhoto();
+// 댓글 쓴 사람 아이디 가져와서 프로필 이미지 가져오기
+String loginnum = memberdao.getNum(myid);
+DogProfileDto loginDogProfile = proDao.getMainDogInfo(loginnum);
+String loginPhoto = loginDogProfile.getPhoto();
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy년-MM월-dd일 HH:mm");
 
 PlaceShareAnswerDao answerDao = new PlaceShareAnswerDao();
@@ -208,7 +213,7 @@ String currentPage = request.getParameter("currentPage");
 			<div style="margin-left: 50%">
 				<button type="button" class="btn btn-light"
 					style="width: 60px; border-radius: 10px;"
-					onclick="location.href='index.jsp?main=place-share/update.jsp?num=<%=boardnum%>'">수정</button>
+					onclick="location.href='index.jsp?main=place-share/update.jsp?num=<%=boardnum%>&currentPage=<%=currentPage%>'">수정</button>
 				<button type="button" class="btn btn-light"
 					style="width: 60px; border-radius: 10px;" id="delete"
 					onclick="location.href='place-share/deleteAction.jsp?num=<%=boardnum%>'">삭제</button>
@@ -234,7 +239,7 @@ String currentPage = request.getParameter("currentPage");
 		</div>
 
 		<!-- 지도 -->
-		<i style="color: #aaaaaa">하단 주소 클릭시 길찾기 페이지로 이동</i><br>
+		<i style="color:#e53b4a; font-size: 13px; opacity: 0.7">하단 주소 클릭시 길찾기 페이지로 이동</i><br>
 		<div class="map-box" style="margin-bottom: 100px;">
 			<div id="map"
 				style="width: 100%; height: 350px; margin-bottom: 20px;"></div>
@@ -244,7 +249,7 @@ String currentPage = request.getParameter("currentPage");
 			<div id="map-addr" style="font-size: 17px; cursor: pointer;"
 				onclick="window.open('https://map.kakao.com/link/to/<%=dto.getMapAddr()%>,<%=dto.getPlaceLa()%>,<%=dto.getPlaceMa()%>', '_blank')">
 				<img src="/TodayWithMyDoggy/place-share/place-photo/kakaomap.png"
-					style="width: 25px; border-radius: 5px; margin-right: 10px;"><%=dto.getMapAddr()%></div>
+					style="width: 20px; border-radius: 5px; margin-right: 10px; font-size: 15px;"><%=dto.getMapAddr()%></div>
 		</div>
 		<i class="fa-solid fa-heart"
 			style="margin-left: 10px; margin-top: 2px; font-size: 16px; cursor: pointer; float: left;"
@@ -294,16 +299,16 @@ String currentPage = request.getParameter("currentPage");
 			<div class="img-box"
 				style="width: 40px; height: 40px; border-radius: 70%; overflow: hidden; float: left; margin-right: 10px;">
 				<img alt="강아지 프로필 사진"
-					src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>" id="dogImg"
+					src="/TodayWithMyDoggy/mypage/dogImg/<%=loginPhoto%>" id="dogImg"
 					style="width: 100%; height: 100%;">&nbsp;&nbsp;
 			</div>
 			<form action="place-share/answerAddAction.jsp">
 				<input type="hidden" id="boardnum" value="<%=boardnum%>"> <input
 					type="hidden" id="myid" value="<%=myid%>"> <input
 					type="hidden" id="nickname" value="<%=nickname%>"> <input
-					type="hidden" id="photo" value="<%=proPhoto%>">
+					type="hidden" id="photo" value="<%=loginPhoto%>">
 				<div class="answer-input" style="float: left; text-align: left">
-					<input type="hidden" id="curr" name="curr" value="<%=currentPage%>">
+					<input type="hidden" id="currentPage" name="currentPage" value="<%=currentPage%>">
 					<input type="text" id="content" class="form-control answer"
 						placeholder="댓글을 입력해주세요"
 						style="float: left; width: 500px; padding: 0 20px;"> <input
@@ -328,13 +333,17 @@ String currentPage = request.getParameter("currentPage");
 				String answerId = answerdto.getId();
 				String answerNickname = memberdao.getNickname(answerId);
 				String modIdx = answerdto.getIdx();
+				String answerNum = memberdao.getNum(answerId);
+				DogProfileDto answerDpt = proDao.getMainDogInfo(answerNum);
+				String answerPhoto = answerDpt.getPhoto();
+				String answerBoardNum = answerdto.getBoardNum();
 			%>
 			<div style="margin-top: 20px;">
 				<div id="answerView">
 					<div class="img-box"
 						style="width: 40px; height: 40px; border-radius: 70%; overflow: hidden; float: left; margin-right: 20px;">
 						<img alt="강아지 프로필 사진"
-							src="/TodayWithMyDoggy/mypage/dogImg/<%=proPhoto%>" id="dogImg"
+							src="/TodayWithMyDoggy/mypage/dogImg/<%=answerPhoto%>" id="dogImg"
 							style='width: 100%; height: 100%;'>&nbsp;&nbsp;
 					</div>
 
@@ -372,13 +381,17 @@ String currentPage = request.getParameter("currentPage");
 							href='place-share/deleteanswer.jsp?idx=<%=answerdto.getIdx()%>'>삭제</a><br>
 						<span class='aday' style='color: gray'><%=answerdto.getWriteday()%></span>
 					</div>
+					<input type="hidden" id="answerBoardNum" name="answerBoardNum"
+						value="<%=answerBoardNum%>">
+					<input type="hidden" id="answerCurrentPage" name="answerCurrentPage"
+						value="<%=currentPage%>">
 					<input type="hidden" class="answerIdx" name="answerIdx"
 						value="<%=modIdx%>">
 
 
 					<div id='answer<%=modIdx%>' class="answerContents"
 						style='width: 400px; font-size: 15px; margin-top: 20px; padding-left: 60px;'>
-						<%=answerdto.getContent()%>
+						<%=answerdto.getContent().replace("\r\n","<br>")%>
 					</div>
 					<input type="text" id="content<%=modIdx%>" name="modContent"
 						value="<%=answerdto.getContent()%>"
@@ -397,18 +410,15 @@ String currentPage = request.getParameter("currentPage");
 			%>
 
 		</div>
-		<br> <br> <input type="hidden" id="num"
-			value="<%=boardnum%>">
-
+		<br><br><input type="hidden" id="num" value="<%=boardnum%>">
 		<script
 			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js">
-			
 		</script>
 		<script>
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
 				center : new kakao.maps.LatLng($("#la").val(), $("#ma").val()), // 지도의 중심좌표
-				level : 4
+				level : 3
 			// 지도의 확대 레벨
 			};
 			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -456,11 +466,11 @@ String currentPage = request.getParameter("currentPage");
 			
 			function submitMod(modIdx) {
 				var boardnum = $("#boardnum").val();
-				var currentPage = $("#curr").val();				
+				var currentPage = $("#currentPage").val();				
 				
 				contentIdx = "#content" + modIdx;
 				var modcontent = $(contentIdx).val();
-				location.href="place-share/answerUpdateAction.jsp?content="+modcontent+"&idx="+modIdx;
+				location.href="place-share/answerUpdateAction.jsp?content="+modcontent+"&idx="+modIdx+"&num="+boardnum+"&currentPage="+currentPage;
 			}
 		</script>
 	</div>

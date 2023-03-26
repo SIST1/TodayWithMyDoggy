@@ -150,11 +150,12 @@ td:not(.table-title), tr {
 	String myid = (String) session.getAttribute("myid");
 	MemberDto mdto = mdao.getMemeber(myid);
 	%>
-
+	<div style="font-size: 13px; text-align:right; color: gray;
+					cursor: pointer; margin-right: 200px;">더보기</div>
 	<div style="width: 700px;" id="abc">
 		<table style="width: 500px; table-layout: fixed;" class="table"
 			id="sort">
-			<tr>
+			<tr style="background-color: #f3f3f3">
 				<td width="100">지역</td>
 				<td width="200">제목</td>
 				<td width="100">작성자</td>

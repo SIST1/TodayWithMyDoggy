@@ -29,7 +29,7 @@
 		String myid = (String)session.getAttribute("myid");
 		
 		String subject = multi.getParameter("subject");
-		String content = multi.getParameter("content");
+		String content = multi.getParameter("content").replace("\r\n","<br>");
 		String photoName = multi.getFilesystemName("photo1");	
 		//위도
 		String placeLa = multi.getParameter("la");

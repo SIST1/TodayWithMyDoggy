@@ -275,10 +275,9 @@ p {
 </style>
 <%
 	String boardnum = request.getParameter("num");
+	String currentPage = request.getParameter("currentPage");
 	PlaceShareBoardDao dao = new PlaceShareBoardDao();
 	PlaceShareBoardDto dto = dao.getData(boardnum);
-	
-	
 %>
 </head>
 <body>
@@ -313,7 +312,7 @@ p {
 				<div class="content">
 					<textarea type="text" class="form-control" rows="17" name="content"
 						id="content" placeholder="내용을 입력해주세요" required="required"
-						style="font-size: 13px;"><%=dto.getContent() %></textarea>
+						style="font-size: 13px;"><%=dto.getContent().replace("<br>","\r\n") %></textarea>
 				</div>
 				<input type="hidden" name="photo" value="<%=dto.getPhotoName()%>">
 				<input type="hidden" name="la" value="<%=dto.getPlaceLa() %>" id="la">

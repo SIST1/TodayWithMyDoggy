@@ -25,13 +25,15 @@
 		multi=new MultipartRequest(request,realPath,uploadSize,"utf-8",new DefaultFileRenamePolicy());
 
 		String num = multi.getParameter("num");
+		String currentPage = multi.getParameter("currentPage");
 		String subject = multi.getParameter("subject");
 		String content = multi.getParameter("content");
 		String photoName = multi.getFilesystemName("photo1");
 		String placeLa = multi.getParameter("la");
 		String placeMa = multi.getParameter("ma");
 		String mapAddr = multi.getParameter("mapAddr");
-
+		
+		
 		PlaceShareBoardDto dto = new PlaceShareBoardDto();
 		dto.setNum(num);
 		dto.setSubject(subject);
@@ -47,12 +49,8 @@
 		PlaceShareBoardDao dao = new PlaceShareBoardDao();
 		dao.updateBoard(dto);
 		
-		response.sendRedirect("../index.jsp?main=place-share/boardList.jsp");
-
+		response.sendRedirect("../index.jsp?main=place-share/detail.jsp?num="+num+"currentPage="+currentPage);
 	} catch(Exception e) {
        response.sendRedirect("UploadFail.jsp");
 	}
 %>
-<input type="hidden" name="la" value="" id="la">
-				<input type="hidden" name="ma" value="" id="ma">
-				<input type="hidden" name="mapAddr" value="" id="mapAddr">

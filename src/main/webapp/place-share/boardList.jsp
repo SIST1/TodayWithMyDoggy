@@ -98,6 +98,11 @@ img:hover {
 	text-overflow: ellipsis;
 }
 /*말 줄임표 생성 끝*/
+
+.card-content {
+	height: 15px;
+}
+
 .img-text {
 	position: absolute;
 	top: 5%;
@@ -175,7 +180,7 @@ List<PlaceShareBoardDto> list = dao.getList(start, perPage);
 	<div class="container2">
 		<div style="float: left; opacity: 0.5;"></div>
 		<div
-			style="text-align: center; font-size: 22px; opacity: 0.8; letter-spacing: 3px; ine-height: 2; padding-bottom: 20px;">
+			style="text-align: center; font-size: 22px; opacity: 0.8; letter-spacing: 3px; ine-height: 2; padding-bottom: 13px;">
 			당신의 사랑스러운 반려견과 함께 다녀온 <br>특별한 장소를 소개해주세요!
 		</div>
 		<%
@@ -247,9 +252,9 @@ List<PlaceShareBoardDto> list = dao.getList(start, perPage);
 								</div>
 								<div
 									style="float: left; padding-top: 5px; font-size: 10px; color: gray">
-									<%=memberdto.getNickname()%>님 &emsp;&emsp; <i
-										class="fa-regular fa-eye"></i><%=dto.getReadCount()%>
-									&nbsp;<i class="fa-regular fa-comment-dots"></i><%=totalAnswerCnt%>
+									<%=memberdto.getNickname()%> &emsp;&nbsp; <i
+										class="fa-regular fa-eye">&nbsp;<%=dto.getReadCount()%></i>
+									<i class="fa-regular fa-comment-dots">&nbsp;<%=totalAnswerCnt%></i>
 								</div>
 								<br>
 

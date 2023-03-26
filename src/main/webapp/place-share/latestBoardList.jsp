@@ -117,22 +117,24 @@ img:hover {
 }
 </style>
 </head>
-<body>
+<body></body>
 	<div class="album pb-5 bt-2">
 		<div class="container">
 			<br> <br>
-					<div style="font-size: 13px; text-align:right; margin-left: 180px; color: gray;
-					cursor: pointer;">더보기</div><br>
 			
+			<div
+				style="font-size: 13px; text-align: right; margin-left: 180px; color: gray; cursor: pointer;">더보기</div>
+			<br>
+
 			<div
 				class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4">
 				<%
 				PlaceShareBoardDao dao = new PlaceShareBoardDao();
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				List<PlaceShareBoardDto> list = dao.getBoardList();
-				int i=1;
+				int i = 1;
 				for (PlaceShareBoardDto dto : list) {
-					if(i==5) {
+					if (i == 5) {
 						break;
 					}
 					String boardNum = dto.getNum();

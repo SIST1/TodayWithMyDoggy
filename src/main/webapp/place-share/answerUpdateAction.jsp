@@ -8,7 +8,7 @@ request.setCharacterEncoding("utf-8");
 
 String content = request.getParameter("content");
 String idx = request.getParameter("idx");
-String num = request.getParameter("num");
+String boardnum = request.getParameter("boardnum");
 String currentPage = request.getParameter("currentPage");
 
 System.out.println(content);
@@ -21,5 +21,4 @@ dto.setContent(content);
 
 dao.updateAnswer(dto);
 
-response.sendRedirect("../index.jsp?main=place-share/boardList.jsp");
 %>
